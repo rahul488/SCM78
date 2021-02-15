@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="User/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>user Dashboard</title>
+</head>
+<body>
+	<section>
+		<div class="card-body mr-4">
+			<h1 class="text-center pt-5">Add Contact</h1>
+			
+    		<div  class="container text-center">
+  				<div th:if="${session.message}" th:classappend="${session.message.content}" class="alert" role="alert">
+  					<span th:text="${session.message.errorMessage}"></span>
+  					<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+  				</div>
+  			</div>
+			<div class="container-fluid mt-1">
+				<div class="row">
+					<div class="col-md-10 offset-md-1">
+						<form th:object="${contact}" action="#" enctype="multipart/form-data"
+							th:action="@{/users/process-contact}" class="mt-2" method="post">
+							<!-- first name -->
+							<div class="input-group">
+								<div class="input-group-prepnd">
+									<div class="input-group-text">
+										<i class="fa fa-plus pt-2"></i>
+									</div>
+								</div>
+								<input type="text" id="firstName" name="name" 
+								placeholder="Enter name here" required="required" class="form-control"/>
+							</div>
+							<!-- second name -->
+							<div class="input-group mt-2">
+								<div class="input-group-prepnd">
+									<div class="input-group-text">
+										<i class="fas fa-user-alt pt-2"></i>
+									</div>
+								</div>
+								<input type="text" id="secondName" name="secondName" 
+								placeholder="Enter nick name here" required="required" class="form-control"/>
+							</div>
+							<!-- Enter phone number -->
+							<div class="input-group mt-2">
+								<div class="input-group-prepnd">
+									<div class="input-group-text">
+										<i class="fa fa-phone pt-2"></i>
+									</div>
+								</div>
+								<input type="text" id="phoneNumber" name="phoneNumber" 
+								placeholder="Enter phone number" required="required" class="form-control"/>
+							</div>
+							<!-- Enter email -->
+							<div class="input-group mt-2">
+								<div class="input-group-prepnd">
+									<div class="input-group-text">
+										@
+									</div>
+								</div>
+								<input type="text" id="email" name="email" 
+								placeholder="Enter Email" required="required" class="form-control"/>
+							</div>
+							<!-- Enter work -->
+							<div class="input-group mt-2">
+								<div class="input-group-prepnd">
+									<div class="input-group-text">
+										<i class="fa fa-briefcase pt-2"></i>
+									</div>
+								</div>
+								<input type="text" id="work" name="work" 
+								placeholder="Enter work" required="required" class="form-control"/>
+							</div>
+							<!-- Enter work -->
+							<div class="input-group mt-3">
+								<textarea name="description" id="description" cols="30"
+									rows="10" class="form-control">
+								</textarea>
+							</div>
+							<!-- image 
+							<div class="custom-file mt-2">
+								<input type="file" name="imageUrl" id="iamgeUrl" />
+							</div>-->
+							<div class="container text-center mt-2">
+								<button class="btn btn-outline-primary">Save Contact</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

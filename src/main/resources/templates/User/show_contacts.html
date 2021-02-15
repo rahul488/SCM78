@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="User/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Show Contacts</title>
+</head>
+<body>
+	<section>
+		<div class="card mr-4">
+			<div class="card-body">
+				<div class="mt-5 ml-4">
+					<h1 class="text-center">Your Contacts</h1>
+				</div>
+				<div  class="container text-center">
+  				<div th:if="${session.message}" th:classappend="${session.message.content}" class="alert" role="alert">
+  					<span th:text="${session.message.errorMessage}"></span>
+  					<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+  				</div>
+  			</div>
+  			
+  			<!-- search -->
+  			<div class="search-container my-4">
+  				<input onkeyup="search()"  id="search-input" type="text" class="form-control" placeholder="Search your contacts">
+  				<div class="search-result">
+  					<!-- result goes here -->
+  		
+  				</div>
+  			</div>
+  			<!-- End of search -->
+  			<div class="table-responsive">
+				<table class="table">
+				
+					<thead>
+						<tr>
+							<th scope="col">#ID</th>
+							<th scope="col">Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Phone</th>
+							<th scope="col">Action</th>
+						</tr>
+
+					</thead>
+					<tbody>
+						<tr th:each="c:${contacts}">
+							<th scope="row" th:text="'SCMUSER'+${c.id}">1</th>
+							<td>
+							<img th:src="@{/img/contact.png}" class="img">
+								<span th:text="${c.name}"></span>
+							</td>
+							<td >
+							<a th:href="@{'/users/contact/'+${c.id}}">
+							<span th:text="${c.email}"></span></a>
+							</td>
+							<td th:text="${c.phoneNumber}"></td>
+							<td>
+
+								<a  onclick="if(!(confirm('Are you want to delete this contact'))) return false"  
+								class="btn btn-danger btn-sm" 
+								th:href="@{'/users/delete/'+${c.id}}">
+								Delete</a>
+								<a  onclick="if(!(confirm('Are you want to update this contact'))) return false"  
+								class="btn btn-success btn-sm" 
+								th:href="@{'/users/update/'+${c.id}}">
+								Update</a>
+
+							</td>
+						</tr>
+
+
+					</tbody>
+
+				</table>
+				</div>
+				<!-- Pagination -->
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li th:if="${currentPage !=0 }" class="page-item"><a class="page-link"th:href="@{'/users/show-contacts/'+${currentPage-1}}">Previous</a></li>
+						
+					 <li th:classappend="${currentPage == i-1 ? 'active' : ''}" th:each="i:${#numbers.sequence(1,totalPage)}" 
+					 class="page-item"><a class="page-link" th:href="@{'/users/show-contacts/'+${i-1}}">
+					 <span th:text="${i}"></span></a></li>	
+						
+						<li th:if="${currentPage+1 != totalPage}"  class="page-item"><a class="page-link" th:href="@{'/users/show-contacts/'+${currentPage+1}}">Next</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		</div>
+	</section>
+</body>
+</html>

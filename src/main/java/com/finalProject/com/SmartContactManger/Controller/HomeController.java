@@ -32,11 +32,13 @@ public class HomeController {
 		return "home";
 	}
 	@RequestMapping("/about")
-	public String about() {
+	public String about(Model model) {
+		model.addAttribute("title", "about");
 		return "about";
 	}
 	@RequestMapping("/signup")
 	public String signup(Model model) {
+		model.addAttribute("title", "SignUp");
 		model.addAttribute("user", new User());
 		return "signup";
 	}
@@ -72,7 +74,8 @@ public class HomeController {
 		
 	}
 	@RequestMapping("/signin")
-	public String login() {
+	public String login(Model model) {
+		model.addAttribute("title", "Login");
 		return "login";
 	}
 

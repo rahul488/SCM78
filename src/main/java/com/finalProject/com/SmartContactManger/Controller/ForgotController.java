@@ -49,10 +49,10 @@ public class ForgotController {
 			return "forgot";
 		}
 		
-		//generating otp of 4 digits
+		//generating otp of 6 digits
 		
 		
-		int otp=random.nextInt(9999);
+		int otp=random.nextInt(999999);
 		
 		//send otp to email
 		

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="index::layout(~{::section})">
 <head>
 <meta charset="ISO-8859-1">
 <title>Home </title>
@@ -10,7 +10,7 @@
 			<h1>Smart Contact Manager</h1>
 			<p>Start Collecting your contacts in very smarter way.
 			We provide very efficient and smarter way of handling contacts.</p>
-			<button class="btn bg-primary btn-lg text-white">Get Started</button>
+			<a th:href="@{/signin}" class="btn bg-primary btn-lg text-white">Get Started</a>
 		</div>
 	</section>
 </body>

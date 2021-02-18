@@ -44,7 +44,8 @@ public class UserController {
 	private BCryptPasswordEncoder encoder;
 	
 	@RequestMapping("/index")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("title", "Home");
 		return "User/index";
 	}
 	
@@ -62,12 +63,13 @@ public class UserController {
 	//user dashboard
 	@RequestMapping("/list")
 	public String userDashboard(Model model,Principal principal) {
-		
+		model.addAttribute("title", "User-dashboard");
 		return "User/user-dashboard";
 	}
 	//add contacts
 	@GetMapping("/add-contact")
 	public String openAddContactFrom(Model model) {
+		model.addAttribute("title", "Add-Contact");
 		model.addAttribute("contact", new Contact());
 		return "User/add-contact";
 	}
@@ -104,6 +106,7 @@ public class UserController {
 		
 		Page<Contact> contacts=this.contactRepo.findContactsBuUser(user.getId(),pageable);
 		
+		m.addAttribute("title", "Show-Contact");
 		m.addAttribute("contacts", contacts);
 		m.addAttribute("currentPage", page);
 		m.addAttribute("totalPage", contacts.getTotalPages());
@@ -122,6 +125,7 @@ public class UserController {
 		Optional<Contact> contactOptional=contactRepo.findById(id);
 		Contact contact=contactOptional.get();
 		if(authorizeUser(principal,contact)) {
+			model.addAttribute("title", "Conatct-Details");
 			model.addAttribute("contact", contact);
 		}
 		return "User/contact_details";
@@ -131,6 +135,8 @@ public class UserController {
 	@GetMapping("/delete/{id}")
 	public String deleteContact(@PathVariable("id") int id,Model model,
 				Principal principal,HttpSession session) {
+		
+		model.addAttribute("title", "Delete-Contact");
 		
 		Optional<Contact> contactId=contactRepo.findById(id);
 		Contact contact=contactId.get();
@@ -151,6 +157,7 @@ public class UserController {
 		Contact contact=contactOptional.get();
 		//check if logged user id is equal to the conatct's user id
 		if(authorizeUser(principal,contact)) {
+			model.addAttribute("title", "Update-Contact");
 			model.addAttribute("contact", contact);
 		}
 		
@@ -184,7 +191,8 @@ public class UserController {
 		return false;
 	}
 	@RequestMapping("/settings")
-	public String settingContacts() {
+	public String settingContacts(Model model) {
+		model.addAttribute("title", "Settings");
 		return "User/settings";
 	}
 	@PostMapping("/change-password")

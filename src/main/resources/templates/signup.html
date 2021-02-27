@@ -18,7 +18,7 @@
 					<p class="text-center" th:text="${session.message.errorMessage}"></p>
 					<th:block th:text="${#session.removeAttribute('message')}"></th:block>
 					</div>
-						<form   th:action="@{/do-register}" th:object="${user}" method="post">
+						<form   th:action="@{/do-register}" enctype="multipart/form-data" th:object="${user}" method="post">
 
 							<!-- name field -->
 							<div class="form-group">
@@ -56,7 +56,7 @@
 							</div>
 							<!-- about field -->
 							<div class="form-group">
-							<textarea th:value="${user.about}" name="about" placeholder="Enter something your self..." rows="10" cols="30" class="form-control mt-2"></textarea>
+							<textarea th:value="${user.about}" name="about" placeholder="Enter something your self..." rows="7" cols="27" class="form-control mt-2"></textarea>
 								
 							</div>
 							
@@ -68,6 +68,9 @@
 									id="agreement" />
 									<label for="agreement">Accept terms and conditions</label>
 								</div>
+								
+<div class="custom-file">							
+<input type="file"  name="imageUrl" id="customFile" /></div>
 
 							<div class="container text-center mt-2">
 							
@@ -75,9 +78,7 @@
 							Submit
 							</button>
 							
-							<button type="reset" class="btn btn-warning btn-block text-white">
-							Reset
-							</button>
+							
 							
 							</div>
 

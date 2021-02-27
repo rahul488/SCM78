@@ -38,7 +38,7 @@ public class UserConfig extends WebSecurityConfigurerAdapter{
 			.and()
 			.formLogin().loginPage("/signin")
 			.loginProcessingUrl("/authenticateUser")
-			.defaultSuccessUrl("/users/index")
+			.defaultSuccessUrl("/users/home")
 			.permitAll();
 			
 	}

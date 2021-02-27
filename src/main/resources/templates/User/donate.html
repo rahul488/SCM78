@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="User/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Donate</title>
+</head>
+<body>
+	<section>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card mt-5">
+						<div class="card-body">
+						<div class="mt-5">
+							<h3 class="text-center">Donate Us</h3>
+							</div> 
+							<div class="mt-3">
+							<input id="payment_field" type="text" class="form-control "
+								required="required" placeholder="Enter amount here">
+							<div class="container my-3">
+								<a class="btn btn-success btn-block mb-5" onclick="paymentStart()">Pay</a>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+</body>
+</html>

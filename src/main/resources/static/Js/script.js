@@ -24,7 +24,7 @@ const search=()=>{
 		//search
 		console.log(query); 
 		//sending request to server
-		let url=`http://localhost:8080/search/${query}`;
+		let url=`/search/${query}`;
 		fetch(url).then((response) => {
 			return response.json();
 		}).then((data)=>{
@@ -56,6 +56,7 @@ const paymentStart=() =>{
 
 	if(amount == '' || amount == null){
 		swal("Oops!", "Amount is required", "error");
+		console.log("Emptyyy");
 		return ;
 	}
 
@@ -94,7 +95,7 @@ const paymentStart=() =>{
 
 						console.log('paymet Successfull');
 
-						swal("Good job!", "Payment Successfull!", "success");
+						swal("Thank You!", "Payment Successfull!", "success");
 					},
 					"prefill": {
 						"name": "",
@@ -127,7 +128,7 @@ const paymentStart=() =>{
 		},
 		error:function(error){
 			console.log(error);
-			alert('payment unsuccessfull');
+			swal("Opps!", "Payment failed", "error");
 		}
 
 	 });

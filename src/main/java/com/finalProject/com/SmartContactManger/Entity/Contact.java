@@ -36,6 +36,7 @@ public class Contact {
 	@JsonIgnore
 	private User user;
 	
+	
 	public Contact() {
 		// TODO Auto-generated constructor stub
 	}

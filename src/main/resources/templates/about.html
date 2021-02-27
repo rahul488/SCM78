@@ -1,17 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="index::layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="index::layout(~{::section})">
 <head>
 <meta charset="ISO-8859-1">
 <title>About</title>
+<link th:href="@{/Css/style.css}" rel="stylesheet" />
 </head>
 <body>
-	<section class="banner d-flex justify-content-center align-items-center">
-		<div class="text-center">
-			<h1>Smart Contact Manager</h1>
-			<p>Start Collecting your contacts in very smarter way.
-			We provide very efficient and smarter way of handling contacts.</p>
-			<button class="btn bg-primary btn-lg text-white">Get Start</button>
+	<section>
+		<div class="about-section">
+			<h1>About Us</h1>
+			<h5>This site provides you to save your contacts in our cloud.</h5>
+			<h6>You can retrieve your data at any time you want .</h6>
 		</div>
+
+		<h2 style="text-align: center">Our Team Members</h2>
+		<div class="row">
+			<div class="column">
+				<div class="card">
+					<img class="image" th:src="@{/img/rahul.jpg}" alt="Rahul"
+						style="width: 100%">
+					<div class="container">
+						<h2>Rahul Das</h2>
+						<p class="title">Back-end Developer</p>
+						<p>Back-end Developer</p>
+						<p>myself.rahul78@gmail.com</p>
+						<p>Contact-7894787693</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="column">
+				<div class="card">
+					<img class="image" th:src="@{/img/Krishna.jpg}" alt="Krishna"
+						style="width: 100%">
+					<div class="container">
+						<h2>Kumarsen Parida</h2>
+						<p class="title">Back-end Developer</p>
+						<p>Back-end Developer</p>
+						<p>krishnaparida35@gmail.com</p>
+						<p>Contact-8917270155</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="column">
+				<div class="card">
+					<img class="image" th:src="@{/img/Dey.jpg}" alt="Dey"
+						style="width: 100%">
+					<div class="container">
+						<h2>SoumyaRanjan Dey</h2>
+						<p class="title">Designer</p>
+						<p>Front-end Developer</p>
+						<p>soumyaranjandeysipun@gmail.com</p>
+						<p>Contact-7077201306</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h6 class="float-right text-dark" >&copy;<i>2021 all rights are reserved by SCM</i></h6>
+		
 	</section>
 </body>
 </html>

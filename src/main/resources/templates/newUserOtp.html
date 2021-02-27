@@ -3,7 +3,6 @@
 	th:replace="index::layout(~{::section})">
 <head>
 <meta charset="ISO-8859-1">
-<title>Login</title>
 </head>
 <body>
 <section>
@@ -20,7 +19,7 @@
 					<th:block th:text="${#session.removeAttribute('message')}"></th:block>
 					</div>
                         
-                        <form th:action="@{/verify-otp}" method="post">
+                        <form th:action="@{/welcome-otp}" method="post">
                         
                          <div class="form-group">
                          	<input required="required" name="otp" type="text" placeholder="Enter otp here" class="form-control">

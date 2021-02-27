@@ -1,0 +1,32 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="User/base::layout(~{::section})">
+<head>
+
+</head>
+<body>
+	<section>
+		<div class="card mr-4">
+			<div class="card-body">
+				<div class="mt-5 ml-4">
+					<h4 class="text-center">Welcome <i th:text="${user.name}"></i></h4>
+					
+					<div  class="text-center" th:if="${user.imageUrl}!=null">
+							
+								<img class="photo" th:src="@{'/img/'+${user.imageUrl}}">
+								</div>
+								<div class="text-center" th:unless="${user.imageUrl}">
+								<img class="user-profile" th:src="@{/img/contact.png}" >
+								</div>
+					<h2 class="text-center mt-4">Add Your Contacts to Our Cloud</h2>
+					<a  class="btn btn-primary btn-block mt-5" th:href="@{/users/add-contact/}">Add Contact</a>
+				</div>
+			</div>
+		</div>
+
+
+
+
+	</section>
+</body>
+</html>

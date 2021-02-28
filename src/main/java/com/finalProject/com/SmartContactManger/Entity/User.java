@@ -124,6 +124,9 @@ public class User {
 		this.contacts = contacts;
 	}
 	
-	
+	public String getPhotosImagePath() {
+		if(imageUrl == null || id == 0) return null;
+		return "/user-photos/"+name+"/"+imageUrl;
+	}
 
 }

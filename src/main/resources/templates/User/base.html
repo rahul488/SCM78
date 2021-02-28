@@ -43,7 +43,7 @@
 				<li class="nav-item mr-3">
 					<div th:if="${user.imageUrl}!=null">
 
-						<img class="photo" th:src="@{'/img/'+${user.imageUrl}}">
+						<img class="photo" th:src="@{${user.photosImagePath}}" />
 					</div>
 					<div th:unless="${user.imageUrl}">
 						<img class="photo" th:src="@{/img/contact.png}">

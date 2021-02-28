@@ -1,6 +1,8 @@
  package com.finalProject.com.SmartContactManger.Controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,6 +16,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.finalProject.com.SmartContactManger.Dao.UserRepository;
 import com.finalProject.com.SmartContactManger.Entity.ErrorMessage;
 import com.finalProject.com.SmartContactManger.Entity.User;
-import com.finalProject.com.SmartContactManger.Service.EmailService;
 import com.finalProject.com.SmartContactManger.Service.VerificationOtp;
 
 
@@ -39,7 +41,6 @@ public class HomeController {
 	
 	@Autowired
 	private VerificationOtp verificationOtp;
-	
 	
 	@RequestMapping("/")
 	public String home() {
@@ -60,35 +61,38 @@ public class HomeController {
 	@PostMapping("/do-register")
 	public String registerUser(@Valid @ModelAttribute("user")User user,
 			BindingResult result,@RequestParam(value = "agreement",defaultValue = "false")
-		boolean agreement,Model model,HttpSession session,@RequestParam("imageUrl") MultipartFile file
-		) {
+		boolean agreement,Model model,HttpSession session,
+		@RequestParam("imageUrl") MultipartFile file) {
 	try {
 		if(!agreement) {
 			//System.out.println("hii");
 		 
 			throw new Exception("Please accept terms and conditions");
 		}
+		
 		String email=user.getEmail();
 		if(userRepo.findByUserName(email) != null) {
 			session.setAttribute("message", new ErrorMessage("Username Already exist", "alert-danger"));
 			return "signup";
 		}
 		
-		if(file.isEmpty()) {
-			System.out.println("Empty fie");
-		}
-		else {
-		//uploading file
-			
-			user.setImageUrl(file.getOriginalFilename());
-			
-			//get destination folder path
-			File saveFile=new ClassPathResource("static/img").getFile();
-			//save image in destionation folder and get path
-			Path path=Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
-			//copy file
-			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-		}
+		//uploading image
+				String fileName=StringUtils.cleanPath(file.getOriginalFilename());
+				user.setImageUrl(file.getOriginalFilename());
+				String uploadDir="user-photos/"+user.getName();
+				
+				Path uploadPath=Paths.get(uploadDir);
+				
+				if(!Files.exists(uploadPath)) {
+					Files.createDirectories(uploadPath);
+				}
+				try(InputStream inputStream=file.getInputStream()){
+					Path filePath=uploadPath.resolve(fileName);
+					Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+				}
+				catch(Exception e) {
+					throw new IOException();
+				}
 		
 		int otp=verificationOtp.createOtp(email);
 		boolean flag=verificationOtp.sendEMail(otp, email);

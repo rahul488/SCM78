@@ -13,7 +13,7 @@
 					
 					<div  class="text-center" th:if="${user.imageUrl}!=null">
 							
-								<img class="photo" th:src="@{'/img/'+${user.imageUrl}}">
+								<img class="user-photo" th:src="@{${user.photosImagePath}}">
 								</div>
 								<div class="text-center" th:unless="${user.imageUrl}">
 								<img class="user-profile" th:src="@{/img/contact.png}" >
